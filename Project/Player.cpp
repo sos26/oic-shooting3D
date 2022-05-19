@@ -41,24 +41,32 @@ void CPlayer::Initialize(void){
 void CPlayer::Update(void){
 	//‰ñ“]•ûŒü
 	float Roll = 0;
+	float m_Speed = PLAYER_SPEED;
+
 	//ƒL[ƒ{[ƒh‚Å‚ÌˆÚ“®
+	if (g_pInput->IsKeyHold(MOFKEY_LSHIFT))
+	{
+		m_Speed *= 4;
+	}
+	//‰¡ˆÚ“®
+	//TODO:‰ñ“]‚µ‚Ä—~‚µ‚¢
 	if (g_pInput->IsKeyHold(MOFKEY_LEFT))
 	{
-		m_Pos.x = max(m_Pos.x - PLAYER_SPEED, -FIELD_HALF_X);
+		m_Pos.x = max(m_Pos.x - m_Speed, -FIELD_HALF_X);
 		Roll -= MOF_MATH_PI;
 	}
 	if (g_pInput->IsKeyHold(MOFKEY_RIGHT))
 	{
-		m_Pos.x = min(m_Pos.x + PLAYER_SPEED, FIELD_HALF_X);
+		m_Pos.x = min(m_Pos.x + m_Speed, FIELD_HALF_X);
 		Roll += MOF_MATH_PI;
 	}
 	if (g_pInput->IsKeyHold(MOFKEY_UP))
 	{
-		m_Pos.z = min(m_Pos.z + PLAYER_SPEED, FIELD_HALF_Z);
+		m_Pos.z = min(m_Pos.z + m_Speed, FIELD_HALF_Z);
 	}
 	if (g_pInput->IsKeyHold(MOFKEY_DOWN))
 	{
-		m_Pos.z = max(m_Pos.z - PLAYER_SPEED, -FIELD_HALF_Z);
+		m_Pos.z = max(m_Pos.z - m_Speed, -FIELD_HALF_Z);
 	}
 	//‰ñ“]
 	float RotSpeed = MOF_ToRadian(10);
